@@ -31,8 +31,7 @@ convenience init<T>(on queue: DispatchQueue = .promises, _ work: @escaping Do<T>
         if let error = resolution as? NSError {
           return error
         } else {
-          // 使用 as AnyObject 并确保不返回 nil
-          return (resolution as AnyObject?) ?? NSNull()
+          return Promise<T>.asAnyObject(resolution) as AnyObject
         }
       } catch let error {
         return error as NSError
